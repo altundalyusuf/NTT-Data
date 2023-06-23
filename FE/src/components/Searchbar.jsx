@@ -1,4 +1,4 @@
-import {Typography, AppBar, Box, Toolbar, InputBase, styled, Button, IconButton, MenuItem, FormControl, Select, TextField, Autocomplete } from '@mui/material';
+import {Typography, AppBar, Box, Toolbar, InputBase, styled, Button, IconButton, MenuItem, FormControl, Select } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
@@ -20,27 +20,24 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     paddingLeft: theme.spacing(2),
     boxSizing: 'border-box',
     border: '1px solid gray',  
+    height: '40px',
     [theme.breakpoints.up('xs')]: {
       borderRight: 'none',
       borderTopRightRadius: 0,
       borderBottomRightRadius: 0,
       width: '200px',
-      height: '40px',
     },
     [theme.breakpoints.up('sm')]: {
       border: '1px solid gray', 
       width: '340px',
-      height: '40px',
     },
     [theme.breakpoints.up('md')]: {
       marginLeft: theme.spacing(1),
       width: '500px',
-      height: '40px',
     },
     [theme.breakpoints.up('lg')]: {
       marginLeft: theme.spacing(1),
       width: '635px',
-      height: '40px',
     },
   },
 }));
@@ -60,6 +57,9 @@ const StyledButton = styled(Button)(({ theme }) => ({
     borderBottomLeftRadius: 0,
     width: '106px',
     height: '40px',
+  },
+  '&:hover': {
+    backgroundColor: '#0059BC',
   },
 }));
 
@@ -83,6 +83,55 @@ const StyledToolbar2 = styled(Toolbar)(({theme})=>({
 
 }))
 
+const StyledForm = styled(FormControl)(() => ({
+  color: 'inherit',
+  boxSizing: 'border-box',
+  position: 'absolute',
+  top: '0',
+  right: '0',
+  }));
+
+  const StyledSelect = styled(Select)(({ theme }) => ({
+      height: '40px',
+      [theme.breakpoints.up('xs')]: {
+        display: 'none',
+      },
+      [theme.breakpoints.up('sm')]: {
+        display: 'block',
+        width: '90px',
+      },
+      [theme.breakpoints.up('md')]: {
+        width: '130px',
+      },
+      [theme.breakpoints.up('lg')]: {
+        width: '180px',
+      },
+      '& .MuiInputBase-input': {
+        paddingTop: '10px',
+        paddingLeft: '20px',
+      },
+    }));
+
+    const StyledMenuItem = styled(MenuItem)(() => ({
+      backgroundColor: '#00254F',
+      color: '#FFFFFF',
+      '&:hover': {
+        backgroundColor: '#0059BC',
+      },
+      '&.Mui-selected': {
+        backgroundColor: '#0059BC',
+        color: 'white',
+      },
+      '&.Mui-selected:hover': {
+        backgroundColor: '#0059BC',
+      },
+    }));  
+
+  const StyledDiv = styled('div')(() => ({
+    display: 'flex',
+    position: 'relative',
+    }));
+
 
 const Searchbar = () => {
 
@@ -91,21 +140,14 @@ const Searchbar = () => {
   const handleChange = (event) => {
     setCategory(event.target.value);
   };
-
-  const options = [
-    { value: 'option1', label: 'Option 1' },
-    { value: 'option2', label: 'Option 2' },
-    { value: 'option3', label: 'Option 3' },
-  ];
-
   return (
     <>
       <Box sx={{ flexGrow: 1, border: 'none' }}>
-      <AppBar position="static" color='primary' sx={{boxShadow: 'none'}}>
+      <AppBar position="static" color='' sx={{boxShadow: 'none'}}>
         {/* Mobil kısmı */}
       <StyledToolbar2>
           <Typography
-              variant="h6"
+              variant="h5"
               noWrap
               component="div" 
             >
@@ -127,7 +169,7 @@ const Searchbar = () => {
     {/* Tablet ve Bilgisayar */}
         <StyledToolbar>
           <Typography
-            variant="h6"
+            variant="h5"
             noWrap
             component="div"
             sx={{
@@ -147,50 +189,29 @@ const Searchbar = () => {
             NTT Data
           </Typography>
 
-
+            {/* Search Bar ve kategori select-option */}
+          <StyledDiv >
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
             /> 
-              {/* <div>
-                <FormControl sx={{ m: 1, minWidth: 120 }}>
-                  <Select
+                <StyledForm variant='filled'>
+                  <StyledSelect
                     value={category}
                     onChange={handleChange}
                     displayEmpty
                     inputProps={{ 'aria-label': 'Without label' }}
                   >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
-                  </Select>
-                </FormControl>
-              </div>
-              <Button sx={{backgroundColor: 'red'}}>
-              safsf
-            </Button> */}
+                    <StyledMenuItem value="">
+                      <em>Categories</em>
+                    </StyledMenuItem>
+                    <StyledMenuItem value={10}>Ten</StyledMenuItem>
+                    <StyledMenuItem value={20}>Twenty</StyledMenuItem>
+                    <StyledMenuItem value={30}>Thirty</StyledMenuItem>
+                  </StyledSelect>
+                </StyledForm>
+              </StyledDiv>
 
-
-
-    {/* <Autocomplete
-      options={options}
-      getOptionLabel={(option) => option.label}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          label="Search"
-          variant="outlined"
-          size="small"
-          sx={{
-            width: '100%',
-            maxWidth: '300px',
-          }}
-        />
-      )}
-    /> */}
           <StyledButton>
               <SearchIconWrapper>
                 <SearchIcon />

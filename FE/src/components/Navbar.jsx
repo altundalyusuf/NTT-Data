@@ -2,7 +2,7 @@
 const Navbar = () => {
   return (
     <>
-     Navbar 2
+     Navbar 
     </>
   )
 }
