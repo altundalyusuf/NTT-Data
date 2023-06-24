@@ -46,17 +46,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const StyledButton = styled(Button)(({ theme }) => ({
   backgroundColor: '#0059BC',
   color: 'white',
-  [theme.breakpoints.up('md')]: {
-    width: '110px',
-    height: '40px',
-    // vertical margin + font size from searchIcon
-    marginLeft: `calc(1em + ${theme.spacing(1)})`,
-  },
-  [theme.breakpoints.down('md')]: {
+  [theme.breakpoints.up('xs')]: {
     borderTopLeftRadius: 0,
     borderBottomLeftRadius: 0,
     width: '106px',
     height: '40px',
+  },
+  [theme.breakpoints.up('sm')]: {
+    borderRadius: theme.shape.borderRadius,
+    width: '110px',
+    height: '40px',
+    // vertical margin + font size from searchIcon
+    marginLeft: `calc(1em + ${theme.spacing(1)})`,
   },
   '&:hover': {
     backgroundColor: '#0059BC',
@@ -96,10 +97,10 @@ const StyledSelect = styled(Select)(({ theme }) => ({
     },
     [theme.breakpoints.up('sm')]: {
       display: 'block',
-      width: '90px',
+      width: '130px',
     },
     [theme.breakpoints.up('md')]: {
-      width: '130px',
+      width: '150px',
     },
     [theme.breakpoints.up('lg')]: {
       width: '180px',
