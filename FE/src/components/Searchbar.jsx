@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AppBar, Box, Toolbar, InputBase, styled, Button, IconButton, MenuItem, FormControl, Select } from '@mui/material';
+import { AppBar, Box, Toolbar, InputBase, styled, Button, IconButton, MenuItem, FormControl, Select, Menu } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import {LetterN, LetterT, LetterT1, LetterD, LetterA, LetterT2, LetterA1} from '../assets/Logo';
@@ -134,14 +134,23 @@ const StyledDiv = styled('div')(() => ({
 const Searchbar = () => {
 
   const [category, setCategory] = useState('');
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleChange = (event) => {
     setCategory(event.target.value);
   };
 
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <>
-      <Box sx={{ flexGrow: 1, border: 'none' }}>
+      <Box sx={{ flexGrow: 1, border: 'none', borderBottom: '1px solid gray' }}>
       <AppBar position="static" color='' sx={{boxShadow: 'none'}}>
         {/* Mobil kısmı */}
       <StyledToolbar2>
@@ -170,11 +179,24 @@ const Searchbar = () => {
           color="inherit"
           aria-label="open drawer"
           sx={{ mr: 2 }}
+          onClick={handleClick}
         >
-          <MenuIcon /> 
+          <MenuIcon/> 
         </IconButton> 
       </StyledToolbar2>
-
+      {/* Mobil ikona tıklayınca kategoriler gelsin */}
+      <div>
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={handleClose}>Option 1</MenuItem>
+          <MenuItem onClick={handleClose}>Option 2</MenuItem>
+          <MenuItem onClick={handleClose}>Option 3</MenuItem>
+        </Menu>
+      </div>
+      
     {/* Tablet ve Bilgisayar */}
         <StyledToolbar>
           {/* Logo */}
