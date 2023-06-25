@@ -7,6 +7,45 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 
 
+const ClampedText = ({ text }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleExpanded = (e) => {
+    e.preventDefault();
+    setIsExpanded(!isExpanded);
+  };
+
+  return (
+    <div>
+      <div
+        style={{
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          display: '-webkit-box',
+          WebkitLineClamp: 2,
+          WebkitBoxOrient: 'vertical',
+        }}
+      >
+        {text}
+      </div>
+      {!isExpanded && (
+        <span onClick={toggleExpanded} style={{color:'#0059BC'}}>
+          <em>... devamını gör</em>
+        </span>
+      )}
+      {isExpanded && (
+        <div>
+          {text}
+          <span onClick={toggleExpanded} style={{color:'#0059BC', marginLeft:6, textDecoration:'underline'}}>
+            Kapat
+          </span>
+        </div>
+      )}
+    </div>
+  );
+};
+
+
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [showMore, setShowMore] = useState(false);
@@ -30,7 +69,6 @@ const Products = () => {
 
   const handleButton = () =>{
     setIsClicked(!isClicked);
-    // isClicked?
   }
 
   const toggleFav = (event,id) =>{
@@ -57,18 +95,68 @@ const Products = () => {
     <Container sx={{p:5}}>
       {/* Heading */}
       <Box sx={{display: 'flex',mb:5, justifyContent:'space-between'}}>
-        <Box><Typography variant="h4" color="initial" fontWeight="bold">Content title goes here</Typography></Box>
+        <Box sx={{marginRight:1}}>
+          <Typography variant="h4" color="initial" fontWeight="bold" 
+          sx={{fontSize: {
+            '@media (max-width:500px)': {
+              fontSize: '13px',
+            },
+              xs: '18px',
+              sm: '22px',
+              md: '33px',
+            },}} >
+          Content title goes here
+          </Typography>
+        </Box>
+          {/* Kalp ikonu beğeni sayısı ve buton */}
         <Box>
           <Box sx={{display:'flex', alignItems: 'center'}}>
-            <div style={{marginRight:9}}><FavoriteBorderIcon/></div>
-            <div style={{marginRight:15}}><Typography variant="subtitle1" color="initial" fontWeight="bold">{favs.length} ÜRÜN</Typography></div>
-            <div><Button  sx={{textTransform:'none'}} variant={isClicked?'outlined':'contained'} color="primary" onClick={handleButton}>{isClicked?'Tüm Ürünler':'Beğenilenler'}</Button></div>
+            {/* Kalp ikonu */}
+            <div style={{marginRight:9}}>
+              <FavoriteBorderIcon 
+                sx={{
+                  fontSize: {
+                    '@media (max-width:500px)': {
+                      fontSize: '16px',
+                    },
+                    xs: '22px',
+                    sm: '25px',
+                    md: '28px',
+                  },
+                }}/>
+            </div>
+              {/* Favori ürün sayısı */}
+            <div style={{marginRight:15}}>
+              <Typography variant="subtitle1" color="initial" fontWeight="bold" sx={{fontSize: {
+                '@media (max-width:500px)': {
+                  fontSize: '11px',
+                },
+              xs: '13px',
+              sm: '15px',
+              md: '19px',
+            },}}>
+                {favs.length} ÜRÜN
+              </Typography>
+            </div>
+             {/* Favoriler / Tüm ürünler butonu */}
+            <div>
+              <Button  
+                sx={{textTransform:'none', fontSize: {
+                  '@media (max-width:500px)': {
+                    fontSize: '9px',
+                  },
+                xs: '11px',
+                sm: '13px',
+                md: '19px',
+                }}} 
+            variant={isClicked?'outlined':'contained'} color="primary" onClick={handleButton}>
+                {isClicked?'Tüm Ürünler':'Beğenilenler'}
+              </Button></div>
           </Box>
-          <Box></Box>
         </Box>
       </Box>
       
-      {/* Cards */}
+      {/* Web & Tablet Cards */}
       <Box sx={{display:{xs:'none',sm:'block'}}}>
       <Grid container spacing={2}>
         {(isClicked?favs:visibleProducts).map((product,index) => (
@@ -92,6 +180,7 @@ const Products = () => {
                 <CardContent sx={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height:{sm:'270px',md:'270px'} }}>
                   <Typography gutterBottom variant="h6" fontWeight='bold' component="div" color='#00254F'>
                     {product.name}
+                    {/* {product.name.length > 30 ? <ClampedText text={product.name} />: product.name} */}
                   </Typography>
                   <Typography gutterBottom variant="subtitle1" fontWeight='bold' component="div" color='#00254F' bgcolor='#E6EEF8' sx={{padding: '4px 8px'}}>
                     {product.price} TL
@@ -99,11 +188,16 @@ const Products = () => {
                   <Typography gutterBottom variant="subtitle1" fontWeight='bold' component="div" color='#00254F'>
                     Description
                   </Typography>
-                  <Typography gutterBottom variant="body1" component="div" color='#00254F'>
-                  {product.description}
+                  <Typography gutterBottom variant="body1" component="div" color='#00254F' 
+                  // sx={{display:{xs:'none',sm:'block',md:'none'}}}
+                  >
+                    <ClampedText text={product.description} />
                   </Typography>
+                  {/* <Typography gutterBottom variant="body1" component="div" color='#00254F' sx={{display:{sm:'none',md:'block'}}}>
+                    {product.description}
+                  </Typography> */}
                   <Typography variant="body2" color="text.secondary">
-                    Ücretsiz - Aynı gün kargo
+                    {product.shippingMethod}
                   </Typography>
                 </CardContent>
               </CardActionArea>
@@ -111,7 +205,7 @@ const Products = () => {
             </Card>
           </Grid>
         ))}
-        {!showMore && (
+        {(!showMore && !isClicked) && (
           <Grid item xs={12}>
             <Button
               variant="contained"
@@ -127,7 +221,7 @@ const Products = () => {
       </Grid>
       </Box>
 
-      {/* Mobil Card */}
+      {/* Mobile Card */}
       <Box sx={{display:{sm:'none'}}}>
       <Carousel showStatus={false} showThumbs={false} swipeable emulateTouch infiniteLoop>
       {(isClicked ? favs : products).map((product, index) => (
@@ -160,10 +254,11 @@ const Products = () => {
                     Description
                   </Typography>
                   <Typography gutterBottom variant="body1" component="div" color='#00254F'>
-                  {product.description}
+                  {/* {product.description} */}
+                    <ClampedText text={product.description} />
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Ücretsiz - Aynı gün kargo
+                  {product.shippingMethod}
                   </Typography>
                 </CardContent>
               </CardActionArea>

@@ -1,9 +1,19 @@
-/* Extra small devices (phones, 600px and down)
-@media only screen and (max-width: 600px) {
-    .responsiveCardText {
-        font-size: 3px;
+/* Yazının 2 satırdan sonra ... olarak gözükmesi */
+.clamped-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* İstenen satır sayısı */
+    -webkit-box-orient: vertical;
+  }
+  
+/* Extra small devices (phones, 600px and down) */
+/* @media only screen and (min-width: 0px) and (max-width:400px) {
+    .responsiveText{
+        font-size: 10px;
     }
-}
+} */
+
 /* Small devices (portrait tablets and large phones, 600px and up) */
 /* @media only screen and (min-width: 600px) {
     .responsiveCardText {
@@ -19,7 +29,7 @@
     .responsiveCardText {
         font-size: 3px;
     }
-} */
+}
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 /* @media only screen and (min-width: 1200px) {
@@ -27,3 +37,5 @@
         font-size: 3px;
     }
 }  */
+
+  

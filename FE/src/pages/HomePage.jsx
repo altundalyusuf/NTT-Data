@@ -3,6 +3,9 @@ const Searchbar = lazy(() => import('../components/Searchbar.jsx'))
 const Navbar = lazy(() => import('../components/Navbar.jsx'))
 const SlideShow = lazy(() => import('../components/SlideShow.jsx'))
 const Products = lazy(() => import('../components/Products.jsx'))
+const Footer = lazy(() => import('../components/Footer.jsx'))
+
+
 const HomePage = () => {
   return (
     <>
@@ -10,6 +13,7 @@ const HomePage = () => {
      <Navbar/>
      <SlideShow/>
      <Products/>
+     <Footer/>
     </>
   )
 }
