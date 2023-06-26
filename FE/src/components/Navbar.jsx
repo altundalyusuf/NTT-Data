@@ -46,7 +46,7 @@ const Navbar = () => {
     event.preventDefault();
   };
 
-
+  const arr = [1,2,3,4,5,6,7,8,9,10,11,12]
   return (
     <>
       {/* Web Kategoriler */}
@@ -56,7 +56,10 @@ const Navbar = () => {
           //   '&.Mui-disabled': { opacity: 0.3 },
           // },
         }} value={value} scrollButtons variant="scrollable" onChange={handleChange} aria-label="nav tabs example">
-          <LinkTab label="Page One" onClick={changeGridVisible} />
+          {arr.map((item,index)=>(
+            <LinkTab key={index} label="Menu Item" onClick={changeGridVisible} />
+          ))}
+          <LinkTab label="Menu Item" onClick={changeGridVisible} />
           <LinkTab label="Page Two" onClick={changeGridVisible} />
           <LinkTab label="Page Three" onClick={changeGridVisible} />
           <LinkTab label="Page Four" onClick={changeGridVisible} />

@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { AppBar, Box, Toolbar, InputBase, styled, Button, IconButton, MenuItem, FormControl, Select, Menu } from '@mui/material';
+import { AppBar, Box, Toolbar, InputBase, styled, Button, IconButton, MenuItem, FormControl, Select } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import {LetterN, LetterT, LetterT1, LetterD, LetterA, LetterT2, LetterA1} from '../assets/Logo';
+import { Drawer, List, ListItem, ListItemText } from '@mui/material';
 
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
@@ -134,19 +135,16 @@ const StyledDiv = styled('div')(() => ({
 const Searchbar = () => {
 
   const [category, setCategory] = useState('');
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [isDrawerOpen, setDrawerOpen] = useState(false);
 
   const handleChange = (event) => {
     setCategory(event.target.value);
   };
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  const toggleDrawer = () => {
+    setDrawerOpen(!isDrawerOpen);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const categories = ['Option 1', 'Option 2', 'Option 3'];
 
   return (
     <>
@@ -179,24 +177,24 @@ const Searchbar = () => {
           color="inherit"
           aria-label="open drawer"
           sx={{ mr: 2 }}
-          onClick={handleClick}
+          onClick={toggleDrawer}
         >
           <MenuIcon/> 
         </IconButton> 
       </StyledToolbar2>
       {/* Mobil ikona tıklayınca kategoriler gelsin */}
       <div>
-        <Menu
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-        >
-          <MenuItem onClick={handleClose}>Option 1</MenuItem>
-          <MenuItem onClick={handleClose}>Option 2</MenuItem>
-          <MenuItem onClick={handleClose}>Option 3</MenuItem>
-        </Menu>
-      </div>
-      
+      <Drawer anchor="right" variant='temporary' open={isDrawerOpen} onClose={toggleDrawer} PaperProps={{ style: { width: '100%', maxWidth: '100vw' } }} >
+        <List sx={{width:{xs:'100vh', sm:'100%'}}}>
+          {categories.map((category, index) => (
+            <ListItem button key={index} onClick={toggleDrawer}>
+              <ListItemText primary={category} />
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+    </div>
+    
     {/* Tablet ve Bilgisayar */}
         <StyledToolbar>
           {/* Logo */}

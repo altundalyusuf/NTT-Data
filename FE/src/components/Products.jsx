@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Grid, Button, Container, Box, Typography,Card,CardContent,CardMedia,CardActionArea} from '@mui/material';
-import axios from 'axios';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import EastIcon from '@mui/icons-material/East';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProducts } from '../redux/features/product/productSlice';
 
 
 const ClampedText = ({ text }) => {
@@ -47,20 +48,18 @@ const ClampedText = ({ text }) => {
 
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
   const [showMore, setShowMore] = useState(false);
   const [favs, setFavs] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
 
+  const dispatch = useDispatch();
+
+  const {products} = useSelector(state =>state.products)
+
   const visibleProducts = showMore ? products : products.slice(0, 4);
 
-  const getData = async() =>{
-    const {data} = await axios.get('https://honey-badgers-ecommerce.glitch.me/products')
-    setProducts(data);
-  }
-
   useEffect(() =>{
-    getData();
+    dispatch(getProducts())
   },[]);
 
   const handleLoadMore = () => {
@@ -158,8 +157,15 @@ const Products = () => {
       
       {/* Web & Tablet Cards */}
       <Box sx={{display:{xs:'none',sm:'block'}}}>
+        {/* Favoriler boşsa yazısı */}
+        {(isClicked && favs.length == 0) && 
+        <Typography gutterBottom variant="h6" component="div" color='white' sx={{display:'flex', justifyContent:'center'}}>
+        <span style={{border: '2px solid #0059BC', color:'#0059BC', padding: '4px 8px', borderRadius:'8px',}} >Favoriler boş.</span>
+      </Typography>
+        }
+        {/* Cards */}
       <Grid container spacing={2}>
-        {(isClicked?favs:visibleProducts).map((product,index) => (
+        {(isClicked?favs:visibleProducts).map((product,index) => (  
           <Grid item xs={12} sm={3} key={index}>
             <Card sx={{ maxWidth: 345, height:'100%' }}>
               <a href="https://google.com" style={{ textDecoration: 'none', color: 'inherit' }}>
@@ -188,7 +194,7 @@ const Products = () => {
                   <Typography gutterBottom variant="subtitle1" fontWeight='bold' component="div" color='#00254F'>
                     Description
                   </Typography>
-                  <Typography gutterBottom variant="body1" component="div" color='#00254F' 
+                  <Typography gutterBottom variant="body1" component="div" color='#00254F'  sx={{overflow: 'auto'}}  
                   // sx={{display:{xs:'none',sm:'block',md:'none'}}}
                   >
                     <ClampedText text={product.description} />
@@ -223,6 +229,11 @@ const Products = () => {
 
       {/* Mobile Card */}
       <Box sx={{display:{sm:'none'}}}>
+      {(isClicked && favs.length == 0) && 
+        <Typography gutterBottom variant="caption" component="div" color='white' sx={{display:'flex', justifyContent:'center'}}>
+        <span style={{border: '2px solid #0059BC', color:'#0059BC', padding: '4px 8px', borderRadius:'8px',}} >Favoriler boş.</span>
+      </Typography>
+        }
       <Carousel showStatus={false} showThumbs={false} swipeable emulateTouch infiniteLoop>
       {(isClicked ? favs : products).map((product, index) => (
         <div key={index}>
