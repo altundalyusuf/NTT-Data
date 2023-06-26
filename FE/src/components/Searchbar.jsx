@@ -250,9 +250,11 @@ const Searchbar = () => {
                       value="">
                       <em>Categories</em>
                     </StyledMenuItem>
-                    <StyledMenuItem value={'Ten'}>Ten</StyledMenuItem>
-                    <StyledMenuItem value={'Twenty'}>Twenty</StyledMenuItem>
-                    <StyledMenuItem value={'Thirty'}>Thirty</StyledMenuItem>
+                    <StyledMenuItem value={'Data'}>Data</StyledMenuItem>
+                    <StyledMenuItem value={'Category Name'}>Category Name</StyledMenuItem>
+                    <StyledMenuItem value={'Category Name'}>Category Name</StyledMenuItem>
+                    <StyledMenuItem value={'Category Name'}>Category Name</StyledMenuItem>
+                    <StyledMenuItem value={'Category Name'}>Category Name</StyledMenuItem>
                   </StyledSelect>
                 </StyledForm>
           </StyledDiv>

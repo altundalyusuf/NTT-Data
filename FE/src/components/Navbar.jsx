@@ -3,7 +3,6 @@ import { Grid, Box, Tabs, Tab, Menu, MenuItem, Link } from '@mui/material';
 import categoryImage from '../assets/categoryImage.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { setGridInvisible, setGridVisible } from '../redux/features/navbar/navbarSlice';
-import { CSSTransition } from 'react-transition-group';
 
 
 const menuItems = [1,2,3,4,5,6,7,8,9,10,11,12]

@@ -67,7 +67,7 @@ const Products = () => {
   },[]);
 
   const handleLoadMore = () => {
-    setShowMore(true);
+    setShowMore(!showMore);
   };
 
   const handleButton = () =>{
@@ -213,19 +213,25 @@ const Products = () => {
             </Card>
           </Grid>
         ))}
-        {(!showMore && !isClicked) && (
-          <Grid item xs={12} sx={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+        {/* Daha Fazla / Az göster butonu */}
+          <Grid item xs={12} sx={{display: 'flex', flexDirection:'column', alignItems:'center'}}>
             <Button
-              variant="contained"
+              variant={showMore?'outlined':'contained'}
               color="primary"
-              sx={{ marginTop: '16px' }}
+              sx={{ marginTop: '16px',
+              textTransform:'none', 
+              display: isClicked ? 'none' : 'block',
+              fontSize: {
+                xs: '11px',
+                sm: '13px',
+                md: '19px',
+              } }}
               onClick={handleLoadMore}
             >
-              Daha Fazla
+                {showMore?'Daha Az':'Daha Fazla'}
               <EastIcon fontSize='small' style={{marginLeft:8}}/>
             </Button>
           </Grid>
-        )}
       </Grid>
       </Box>
 
