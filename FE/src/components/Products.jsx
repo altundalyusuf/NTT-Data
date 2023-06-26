@@ -245,7 +245,6 @@ const Products = () => {
       <Carousel showStatus={false} showThumbs={false} swipeable emulateTouch infiniteLoop>
       {(isClicked ? favs : products).map((product, index) => (
         <div key={index} style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
-          <Card sx={{ maxWidth: 345, height: '100%' }}>
           <Card sx={{ maxWidth: 345, height:'100%' }}>
               <a href="https://google.com" style={{ textDecoration: 'none', color: 'inherit' }}>
               <CardActionArea>
@@ -282,7 +281,6 @@ const Products = () => {
               </CardActionArea>
               </a>
             </Card>
-          </Card>
         </div>
       ))}
     </Carousel>

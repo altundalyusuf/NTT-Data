@@ -114,19 +114,6 @@ const StyledSelect = styled(Select)(({ theme }) => ({
     },
 }));
 
-const StyledMenuItem = styled(MenuItem)(() => ({
-  backgroundColor: '#00254F',
-  color: '#FFFFFF',
-  '&:hover': {
-    backgroundColor: '#0059BC',
-  },
-  '&.Mui-selected': {
-    backgroundColor: '#0059BC',
-  },
-  '&.Mui-selected:hover': {
-    backgroundColor: '#0059BC',
-  },
-}));  
 
 const StyledDiv = styled('div')(() => ({
   display: 'flex',
@@ -242,19 +229,15 @@ const Searchbar = () => {
                     displayEmpty
                     inputProps={{ 'aria-label': 'Without label' }}
                   >
-                    <StyledMenuItem
-                      sx={{color: 'white',
-                      '&.Mui-selected': {
-                        color: 'black',
-                      },}}
+                    <MenuItem
                       value="">
                       <em>Categories</em>
-                    </StyledMenuItem>
-                    <StyledMenuItem value={'Data'}>Data</StyledMenuItem>
-                    <StyledMenuItem value={'Category Name'}>Category Name</StyledMenuItem>
-                    <StyledMenuItem value={'Category Name'}>Category Name</StyledMenuItem>
-                    <StyledMenuItem value={'Category Name'}>Category Name</StyledMenuItem>
-                    <StyledMenuItem value={'Category Name'}>Category Name</StyledMenuItem>
+                    </MenuItem>
+                    <MenuItem value={'Data'}>Data</MenuItem>
+                    <MenuItem value={'Category Name'}>Category Name</MenuItem>
+                    <MenuItem value={'Category Name'}>Category Name</MenuItem>
+                    <MenuItem value={'Category Name'}>Category Name</MenuItem>
+                    <MenuItem value={'Category Name'}>Category Name</MenuItem>
                   </StyledSelect>
                 </StyledForm>
           </StyledDiv>

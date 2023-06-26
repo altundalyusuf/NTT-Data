@@ -1,0 +1,23 @@
+/* Mobil product card'ları altındaki noktalar için */
+div.carousel.carousel-slider>ul.control-dots>.dot.selected{
+    background-color: blue;
+    color:red;
+}
+div.carousel.carousel-slider>ul.control-dots>.dot{
+    background-color: black;
+}
+div.carousel.carousel-slider>ul.control-dots{
+    top: 94%;
+}
+
+/* search input category kısmı için stiller  */
+.MuiList-root.MuiList-padding.MuiMenu-list.css-6hp17o-MuiList-root-MuiMenu-list{
+    background-color: #00254F;
+    color:white
+}
+.MuiList-root.MuiList-padding.MuiMenu-list.css-6hp17o-MuiList-root-MuiMenu-list > li:hover{
+    background-color: #0059BC;
+    margin:0 8px;
+    border-radius: 3px;
+}
+
