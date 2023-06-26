@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import {  useState } from 'react';
 import { AppBar, Box, Toolbar, InputBase, styled, Button, IconButton, MenuItem, FormControl, Select } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import {LetterN, LetterT, LetterT1, LetterD, LetterA, LetterT2, LetterA1} from '../assets/Logo';
-import { Drawer, List, ListItem, ListItemText, Typography } from '@mui/material';
+import { Drawer, List, ListItem, Typography } from '@mui/material';
 import { useDispatch} from 'react-redux';
 import { setGridInvisible } from '../redux/features/navbar/navbarSlice';
 
@@ -126,6 +126,8 @@ const Searchbar = () => {
   const [category, setCategory] = useState('');
   const [isDrawerOpen, setDrawerOpen] = useState(false);
 
+  const categories = ['Category 1', 'Category 2', 'Category 3', 'Category 4'];
+
     // Navbar menüsünü kapa
     const dispatch = useDispatch();
     const changeGridInvisible = () => {
@@ -138,8 +140,6 @@ const Searchbar = () => {
   const toggleDrawer = () => {
     setDrawerOpen(!isDrawerOpen);
   };
-
-  const categories = ['Category 1', 'Category 2', 'Category 3', 'Category 4'];
 
   return (
     <>
@@ -256,4 +256,4 @@ const Searchbar = () => {
   )
 }
 
-export default Searchbar
+export default Searchbar;

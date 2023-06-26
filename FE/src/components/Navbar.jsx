@@ -70,7 +70,7 @@ const Navbar = () => {
           {menuItems.slice(0, 6).map((_, index) => (
             <LinkTab key={index} label="Menu Item" style={{ textTransform: 'none' }} onClick={changeGridVisible} />
           ))}
-            <LinkTab label="More" style={{ textTransform: 'none' }} onClick={handleClick} />
+            <LinkTab label="More" sx={{ textTransform: 'none' }} onClick={handleClick} />
           </Tabs>
         </Box>
         <div>
@@ -78,11 +78,19 @@ const Navbar = () => {
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={handleClose}
+            sx={{
+              '& .MuiList-root.MuiList-padding.MuiMenu-list.css-6hp17o-MuiList-root-MuiMenu-list': {
+                backgroundColor: '#F4F5F6',
+                color: '#6A6D70',
+                '& :hover':{
+                  backgroundColor: 'gray',
+                  color:'white'
+                }
+              }
+            }}
           >
             {menuItems.slice(0, 3).map((_, index) => (
-            <MenuItem key={index} sx={{
-              backgroundColor: 'lightgray'
-            }} onClick={handleClose}>Menu Item</MenuItem>
+            <MenuItem key={index} onClick={handleClose}>Menu Item</MenuItem>
           ))}
           </Menu>
         </div>
