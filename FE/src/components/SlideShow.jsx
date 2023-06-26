@@ -14,6 +14,8 @@ import mobil2 from '../assets/mobil2.png';
 import mobil3 from '../assets/mobil3.png';
 import mobil4 from '../assets/mobil4.png';
 import { Box } from '@mui/material';
+import { useDispatch} from 'react-redux';
+import { setGridInvisible } from '../redux/features/navbar/navbarSlice';
 
 const webSlides = [{image: web1,caption: 'Slide 1',},{image: web2,caption: 'Slide 2',},{image: web3,caption: 'Slide 3',},{image: web4,caption: 'Slide 4',},];
 const tabletSlides = [{image: tablet1,caption: 'Slide 1',},{image: tablet2,caption: 'Slide 2',},{image: tablet3,caption: 'Slide 3',},{image: tablet4,caption: 'Slide 4',},];
@@ -21,6 +23,12 @@ const mobileSlides = [{image: mobil1,caption: 'Slide 1',},{image: mobil2,caption
 
 const Slideshow = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  
+  // Navbar menüsünü kapa
+  const dispatch = useDispatch();
+  const changeGridInvisible = () => {
+    dispatch(setGridInvisible())
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -33,7 +41,7 @@ const Slideshow = () => {
   return (
     <>
       {/* Web */}
-      <Box sx={{display:{xs:'none',md:'block'}}}>
+      <Box sx={{display:{xs:'none',md:'block'}}} onClick={changeGridInvisible} >
         <Carousel
           autoPlay
           infiniteLoop

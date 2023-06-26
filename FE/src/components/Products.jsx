@@ -6,7 +6,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../redux/features/product/productSlice';
-
+import { setGridInvisible } from '../redux/features/navbar/navbarSlice';
 
 const ClampedText = ({ text }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -22,7 +22,7 @@ const ClampedText = ({ text }) => {
         style={{
           overflow: 'hidden',
           textOverflow: 'ellipsis',
-          display: '-webkit-box',
+          display: isExpanded? 'none' : '-webkit-box',
           WebkitLineClamp: 2,
           WebkitBoxOrient: 'vertical',
         }}
@@ -53,6 +53,10 @@ const Products = () => {
   const [isClicked, setIsClicked] = useState(false);
 
   const dispatch = useDispatch();
+
+  const changeGridInvisible = () => {
+    dispatch(setGridInvisible())
+  }
 
   const {products} = useSelector(state =>state.products)
 
@@ -91,7 +95,7 @@ const Products = () => {
   }
 
   return (
-    <Container sx={{p:5}}>
+    <Container sx={{p:5}} onClick={changeGridInvisible}>
       {/* Heading */}
       <Box sx={{display: 'flex',mb:5, justifyContent:'space-between'}}>
         <Box sx={{marginRight:1}}>
@@ -160,7 +164,7 @@ const Products = () => {
         {/* Favoriler boşsa yazısı */}
         {(isClicked && favs.length == 0) && 
         <Typography gutterBottom variant="h6" component="div" color='white' sx={{display:'flex', justifyContent:'center'}}>
-        <span style={{border: '2px solid #0059BC', color:'#0059BC', padding: '4px 8px', borderRadius:'8px',}} >Favoriler boş.</span>
+        <span style={{border: '2px solid #0059BC', color:'#0059BC', padding: '4px 8px', borderRadius:'8px', cursor:'pointer'}} onClick={handleButton} >Favoriler boş.</span>
       </Typography>
         }
         {/* Cards */}
@@ -183,10 +187,9 @@ const Products = () => {
                     </span>
                   </Box>
                 </Box>
-                <CardContent sx={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height:{sm:'270px',md:'270px'} }}>
+                <CardContent sx={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height:{sm:'270px',md:'270px'}, overflow: 'auto' }}>
                   <Typography gutterBottom variant="h6" fontWeight='bold' component="div" color='#00254F'>
-                    {product.name}
-                    {/* {product.name.length > 30 ? <ClampedText text={product.name} />: product.name} */}
+                    {product.name.length > 30 ? <ClampedText text={product.name} />: product.name}
                   </Typography>
                   <Typography gutterBottom variant="subtitle1" fontWeight='bold' component="div" color='#00254F' bgcolor='#E6EEF8' sx={{padding: '4px 8px'}}>
                     {product.price} TL
@@ -194,14 +197,13 @@ const Products = () => {
                   <Typography gutterBottom variant="subtitle1" fontWeight='bold' component="div" color='#00254F'>
                     Description
                   </Typography>
-                  <Typography gutterBottom variant="body1" component="div" color='#00254F'  sx={{overflow: 'auto'}}  
-                  // sx={{display:{xs:'none',sm:'block',md:'none'}}}
+                  <Typography gutterBottom variant="body1" component="div" color='#00254F'  sx={{display:{xs:'none',sm:'block',md:'none'}}}  
                   >
                     <ClampedText text={product.description} />
                   </Typography>
-                  {/* <Typography gutterBottom variant="body1" component="div" color='#00254F' sx={{display:{sm:'none',md:'block'}}}>
+                  <Typography gutterBottom variant="body1" component="div" color='#00254F' sx={{display:{xs:'none',md:'block'}}}>
                     {product.description}
-                  </Typography> */}
+                  </Typography>
                   <Typography variant="body2" color="text.secondary">
                     {product.shippingMethod}
                   </Typography>
@@ -212,7 +214,7 @@ const Products = () => {
           </Grid>
         ))}
         {(!showMore && !isClicked) && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{display:'flex', flexDirection:'column', alignItems:'center'}}>
             <Button
               variant="contained"
               color="primary"
@@ -231,12 +233,12 @@ const Products = () => {
       <Box sx={{display:{sm:'none'}}}>
       {(isClicked && favs.length == 0) && 
         <Typography gutterBottom variant="caption" component="div" color='white' sx={{display:'flex', justifyContent:'center'}}>
-        <span style={{border: '2px solid #0059BC', color:'#0059BC', padding: '4px 8px', borderRadius:'8px',}} >Favoriler boş.</span>
+        <span style={{border: '2px solid #0059BC', color:'#0059BC', padding: '4px 8px', borderRadius:'8px', cursor:'pointer'}} onClick={handleButton} >Favoriler boş.</span>
       </Typography>
         }
       <Carousel showStatus={false} showThumbs={false} swipeable emulateTouch infiniteLoop>
       {(isClicked ? favs : products).map((product, index) => (
-        <div key={index}>
+        <div key={index} style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
           <Card sx={{ maxWidth: 345, height: '100%' }}>
           <Card sx={{ maxWidth: 345, height:'100%' }}>
               <a href="https://google.com" style={{ textDecoration: 'none', color: 'inherit' }}>
@@ -254,9 +256,9 @@ const Products = () => {
                     </span>
                   </Box>
                 </Box>
-                <CardContent sx={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height:{sm:'270px',md:'270px'} }}>
+                <CardContent sx={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height:{sm:'270px',md:'270px'}, overflow: 'auto' }}>
                   <Typography gutterBottom variant="h6" fontWeight='bold' component="div" color='#00254F'>
-                    {product.name}
+                  {product.name.length > 30 ? <ClampedText text={product.name} />: product.name}
                   </Typography>
                   <Typography gutterBottom variant="subtitle1" fontWeight='bold' component="div" color='#00254F' bgcolor='#E6EEF8' sx={{padding: '4px 8px'}}>
                     {product.price} TL
@@ -265,7 +267,6 @@ const Products = () => {
                     Description
                   </Typography>
                   <Typography gutterBottom variant="body1" component="div" color='#00254F'>
-                  {/* {product.description} */}
                     <ClampedText text={product.description} />
                   </Typography>
                   <Typography variant="body2" color="text.secondary">

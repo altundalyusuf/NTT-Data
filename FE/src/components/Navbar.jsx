@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import { Grid, Box, Tabs, Tab, Menu, MenuItem, Link } from '@mui/material';
-// import { tabsClasses } from '@mui/material';
 import categoryImage from '../assets/categoryImage.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { setGridInvisible, setGridVisible } from '../redux/features/navbar/navbarSlice';
+import { CSSTransition } from 'react-transition-group';
 
+
+const menuItems = [1,2,3,4,5,6,7,8,9,10,11,12]
 
 function LinkTab(props) {
   return (
@@ -20,7 +24,9 @@ const Navbar = () => {
   // const [value, setValue] = useState(null);
   const [value, setValue] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [isGridVisible, setGridVisible] = useState(false);
+
+  const dispatch = useDispatch();
+  const {isGridVisible} = useSelector(state =>state.isGridVisible)
 
 
   const handleChange = (event, newValue) => {
@@ -36,40 +42,25 @@ const Navbar = () => {
   };
 
   const changeGridVisible = () => {
-    setGridVisible(true)
+    dispatch(setGridVisible())
   }
   const changeGridInvisible = () => {
-    setGridVisible(false)
+    dispatch(setGridInvisible())
   }
 
   const handleReload = (event) => {
     event.preventDefault();
   };
 
-  const arr = [1,2,3,4,5,6,7,8,9,10,11,12]
+  
   return (
     <>
       {/* Web Kategoriler */}
       <Box sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: 'center', marginTop: '5px' }}>
-        <Tabs sx={{
-          // [`& .${tabsClasses.scrollButtons}`]: {
-          //   '&.Mui-disabled': { opacity: 0.3 },
-          // },
-        }} value={value} scrollButtons variant="scrollable" onChange={handleChange} aria-label="nav tabs example">
-          {arr.map((item,index)=>(
-            <LinkTab key={index} label="Menu Item" onClick={changeGridVisible} />
+        <Tabs value={value} scrollButtons variant="scrollable" onChange={handleChange} aria-label="nav tabs example">
+          {menuItems.map((_,index)=>(
+            <LinkTab key={index} label="Menu Item" style={{ textTransform: 'none' }} onClick={changeGridVisible} />
           ))}
-          <LinkTab label="Menu Item" onClick={changeGridVisible} />
-          <LinkTab label="Page Two" onClick={changeGridVisible} />
-          <LinkTab label="Page Three" onClick={changeGridVisible} />
-          <LinkTab label="Page Four" onClick={changeGridVisible} />
-          <LinkTab label="Page Five" onClick={changeGridVisible} />
-          <LinkTab label="Page Six" onClick={changeGridVisible} />
-          <LinkTab label="Page Seven" onClick={changeGridVisible} />
-          <LinkTab label="Page Eight" onClick={changeGridVisible} />
-          <LinkTab label="Page Nine" onClick={changeGridVisible} />
-          <LinkTab label="Page Ten" onClick={changeGridVisible} />
-          {/* <LinkTab label="Page Ten" onClick={() => setGridVisible(true)} /> */}
         </Tabs>
       </Box>
 
@@ -77,10 +68,10 @@ const Navbar = () => {
       <Box sx={{ display: { xs: 'none', sm: 'block', md: 'none' }, marginTop: '5px' }}>
         <Box sx={{ marginTop: '5px' }}>
           <Tabs centered value={value} onChange={handleChange} aria-label="nav tabs example">
-            <LinkTab label="Page One" href="/" />
-            <LinkTab label="Page Two" href="/" />
-            <LinkTab label="Page Three" href="/" />
-            <LinkTab label="Open Dropdown" onClick={handleClick} />
+          {menuItems.slice(0, 6).map((_, index) => (
+            <LinkTab key={index} label="Menu Item" style={{ textTransform: 'none' }} onClick={changeGridVisible} />
+          ))}
+            <LinkTab label="More" style={{ textTransform: 'none' }} onClick={handleClick} />
           </Tabs>
         </Box>
         <div>
@@ -89,18 +80,16 @@ const Navbar = () => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem sx={{
+            {menuItems.slice(0, 3).map((_, index) => (
+            <MenuItem key={index} sx={{
               backgroundColor: 'lightgray'
-            }} onClick={handleClose}>Option 1</MenuItem>
-            <MenuItem sx={{
-              backgroundColor: 'lightgray'
-            }} onClick={handleClose}>Option 2</MenuItem>
-            <MenuItem sx={{
-              backgroundColor: 'lightgray'
-            }} onClick={handleClose}>Option 3</MenuItem>
+            }} onClick={handleClose}>Menu Item</MenuItem>
+          ))}
           </Menu>
         </div>
       </Box>
+
+      {/* Mobil Kategoriler ikon orada olduğu için Searchbar component'inde */}
 
       {/* Kategori detayları */}
       <div style={{display: 'flex', justifyContent: 'center'}}>

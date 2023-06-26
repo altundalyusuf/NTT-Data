@@ -3,7 +3,9 @@ import { AppBar, Box, Toolbar, InputBase, styled, Button, IconButton, MenuItem, 
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import {LetterN, LetterT, LetterT1, LetterD, LetterA, LetterT2, LetterA1} from '../assets/Logo';
-import { Drawer, List, ListItem, ListItemText } from '@mui/material';
+import { Drawer, List, ListItem, ListItemText, Typography } from '@mui/material';
+import { useDispatch} from 'react-redux';
+import { setGridInvisible } from '../redux/features/navbar/navbarSlice';
 
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
@@ -137,6 +139,12 @@ const Searchbar = () => {
   const [category, setCategory] = useState('');
   const [isDrawerOpen, setDrawerOpen] = useState(false);
 
+    // Navbar menüsünü kapa
+    const dispatch = useDispatch();
+    const changeGridInvisible = () => {
+      dispatch(setGridInvisible())
+    }
+
   const handleChange = (event) => {
     setCategory(event.target.value);
   };
@@ -144,11 +152,11 @@ const Searchbar = () => {
     setDrawerOpen(!isDrawerOpen);
   };
 
-  const categories = ['Option 1', 'Option 2', 'Option 3'];
+  const categories = ['Category 1', 'Category 2', 'Category 3', 'Category 4'];
 
   return (
     <>
-      <Box sx={{ flexGrow: 1, border: 'none', borderBottom: '1px solid gray' }}>
+      <Box sx={{ flexGrow: 1, border: 'none', borderBottom: '1px solid gray' }} onClick={changeGridInvisible}>
       <AppBar position="static" color='' sx={{boxShadow: 'none'}}>
         {/* Mobil kısmı */}
       <StyledToolbar2>
@@ -187,8 +195,8 @@ const Searchbar = () => {
       <Drawer anchor="right" variant='temporary' open={isDrawerOpen} onClose={toggleDrawer} PaperProps={{ style: { width: '100%', maxWidth: '100vw' } }} >
         <List sx={{width:{xs:'100vh', sm:'100%'}}}>
           {categories.map((category, index) => (
-            <ListItem button key={index} onClick={toggleDrawer}>
-              <ListItemText primary={category} />
+            <ListItem button key={index} onClick={toggleDrawer} sx={{borderBottom: index === categories.length - 1 ? '3px solid #D9D9D9' : 'none', mt: index=== 0?5:''}}>
+              <Typography variant="h6" fontWeight='bold' color="initial">{category}</Typography>
             </ListItem>
           ))}
         </List>
