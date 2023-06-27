@@ -248,7 +248,7 @@ const Products = () => {
         <span style={{border: '2px solid #0059BC', color:'#0059BC', padding: '4px 8px', borderRadius:'8px', cursor:'pointer'}} onClick={handleButton} >Favoriler boş.</span>
       </Typography>
         }
-      <Carousel showStatus={false} showThumbs={false} swipeable emulateTouch infiniteLoop>
+      <Carousel showStatus={false} showThumbs={false} showArrows={false} swipeable emulateTouch infiniteLoop>
       {(isClicked ? favs : products).map((product, index) => (
         <div key={index} style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
           <Card sx={{ maxWidth: 345, height:'100%' }}>
