@@ -58,22 +58,28 @@ const Products = () => {
     dispatch(setGridInvisible())
   }
 
+  // Ürünler
   const {products} = useSelector(state =>state.products)
 
+  // Butona tıklanmadıysa 4 tane ürün göster
   const visibleProducts = showMore ? products : products.slice(0, 4);
 
+  // Sayfa yüklendiğinde ürünleri çek
   useEffect(() =>{
     dispatch(getProducts())
   },[]);
 
+  // Butona basınca daha fazla yükle
   const handleLoadMore = () => {
     setShowMore(!showMore);
   };
 
+  // Beğenilenler / Tüm ürünler butonu
   const handleButton = () =>{
     setIsClicked(!isClicked);
   }
 
+  // Favorilere ekle / çıkar
   const toggleFav = (event,id) =>{
     // Linke yönlendirmeyi engelle
     event.preventDefault();

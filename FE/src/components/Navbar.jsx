@@ -20,8 +20,7 @@ function LinkTab(props) {
 }
 
 const Navbar = () => {
-  // const [value, setValue] = useState(null);
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const dispatch = useDispatch();
@@ -49,6 +48,7 @@ const Navbar = () => {
 
   const handleReload = (event) => {
     event.preventDefault();
+    changeGridInvisible()
   };
 
   
@@ -100,7 +100,7 @@ const Navbar = () => {
 
       {/* Kategori detayları */}
       <div style={{display: 'flex', justifyContent: 'center'}}>
-        <Box sx={{ backgroundColor: '#F4F5F6', p: 5, position:'absolute', zIndex:999, mx: 9, display: { xs: 'none', md: isGridVisible ? 'grid' : 'none' } }} onClick={changeGridInvisible}>
+        <Box sx={{ backgroundColor: '#F4F5F6', p: 5, position:'absolute', zIndex:999, mx: 9, display: { xs: 'none', md: isGridVisible ? 'grid' : 'none' } }}>
           <Grid container spacing={2}>
             <Grid item sm={4}>
               <Box sx={{ display: 'flex' }}>
@@ -109,30 +109,11 @@ const Navbar = () => {
                     <Box sx={{ typography: 'subtitle1', fontWeight: 'bold', pb: 1 }} >
                       <Link href="/" underline="none" color="inherit" sx={{ '&:hover': { color: '#0059BC' } }} onClick={handleReload} >Header</Link>
                     </Box>
-                    <Box sx={{ typography: 'subtitle1', pb: 1 }}>
+                    {menuItems.slice(0, 8).map((_, index) => (
+                      <Box key={index} sx={{ typography: 'subtitle1', pb: 1 }}>
                       <Link href="/" underline="none" color="inherit" sx={{ '&:hover': { color: '#0059BC' } }} onClick={handleReload}>Subheader</Link>
                     </Box>
-                    <Box sx={{ typography: 'subtitle1', pb: 1 }}>
-                      <Link href="/" underline="none" color="inherit" sx={{ '&:hover': { color: '#0059BC' } }} onClick={handleReload}>Subheader</Link>
-                    </Box>
-                    <Box sx={{ typography: 'subtitle1', pb: 1 }}>
-                      <Link href="/" underline="none" color="inherit" sx={{ '&:hover': { color: '#0059BC' } }} onClick={handleReload}>Subheader</Link>
-                    </Box>
-                    <Box sx={{ typography: 'subtitle1', pb: 1 }}>
-                      <Link href="/" underline="none" color="inherit" sx={{ '&:hover': { color: '#0059BC' } }} onClick={handleReload}>Subheader</Link>
-                    </Box>
-                    <Box sx={{ typography: 'subtitle1', pb: 1 }}>
-                      <Link href="/" underline="none" color="inherit" sx={{ '&:hover': { color: '#0059BC' } }} onClick={handleReload}>Subheader</Link>
-                    </Box>
-                    <Box sx={{ typography: 'subtitle1', pb: 1 }}>
-                      <Link href="/" underline="none" color="inherit" sx={{ '&:hover': { color: '#0059BC' } }} onClick={handleReload}>Subheader</Link>
-                    </Box>
-                    <Box sx={{ typography: 'subtitle1', pb: 1 }}>
-                      <Link href="/" underline="none" color="inherit" sx={{ '&:hover': { color: '#0059BC' } }} onClick={handleReload}>Subheader</Link>
-                    </Box>
-                    <Box sx={{ typography: 'subtitle1', pb: 1 }}>
-                      <Link href="/" underline="none" color="inherit" sx={{ '&:hover': { color: '#0059BC' } }} onClick={handleReload}>Subheader</Link>
-                    </Box>
+                    ))}
                   </div>
                 </Grid>
                 <Grid item sm={6}>
@@ -140,30 +121,11 @@ const Navbar = () => {
                     <Box sx={{ typography: 'subtitle1', fontWeight: 'bold', pb: 1 }}>
                       <Link href="/" underline="none" color="inherit" sx={{ '&:hover': { color: '#0059BC' } }} onClick={handleReload}>Header</Link>
                     </Box>
-                    <Box sx={{ typography: 'subtitle1', pb: 1 }}>
+                    {menuItems.slice(0, 8).map((_, index) => (
+                      <Box key={index} sx={{ typography: 'subtitle1', pb: 1 }}>
                       <Link href="/" underline="none" color="inherit" sx={{ '&:hover': { color: '#0059BC' } }} onClick={handleReload}>Subheader</Link>
                     </Box>
-                    <Box sx={{ typography: 'subtitle1', pb: 1 }}>
-                      <Link href="/" underline="none" color="inherit" sx={{ '&:hover': { color: '#0059BC' } }} onClick={handleReload}>Subheader</Link>
-                    </Box>
-                    <Box sx={{ typography: 'subtitle1', pb: 1 }}>
-                      <Link href="/" underline="none" color="inherit" sx={{ '&:hover': { color: '#0059BC' } }} onClick={handleReload}>Subheader</Link>
-                    </Box>
-                    <Box sx={{ typography: 'subtitle1', pb: 1 }}>
-                      <Link href="/" underline="none" color="inherit" sx={{ '&:hover': { color: '#0059BC' } }} onClick={handleReload}>Subheader</Link>
-                    </Box>
-                    <Box sx={{ typography: 'subtitle1', pb: 1 }}>
-                      <Link href="/" underline="none" color="inherit" sx={{ '&:hover': { color: '#0059BC' } }} onClick={handleReload}>Subheader</Link>
-                    </Box>
-                    <Box sx={{ typography: 'subtitle1', pb: 1 }}>
-                      <Link href="/" underline="none" color="inherit" sx={{ '&:hover': { color: '#0059BC' } }} onClick={handleReload}>Subheader</Link>
-                    </Box>
-                    <Box sx={{ typography: 'subtitle1', pb: 1 }}>
-                      <Link href="/" underline="none" color="inherit" sx={{ '&:hover': { color: '#0059BC' } }} onClick={handleReload}>Subheader</Link>
-                    </Box>
-                    <Box sx={{ typography: 'subtitle1', pb: 1 }}>
-                      <Link href="/" underline="none" color="inherit" sx={{ '&:hover': { color: '#0059BC' } }} onClick={handleReload}>Subheader</Link>
-                    </Box>
+                    ))}
                   </div>
                 </Grid>
               </Box>

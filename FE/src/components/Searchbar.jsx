@@ -100,10 +100,10 @@ const StyledSelect = styled(Select)(({ theme }) => ({
     },
     [theme.breakpoints.up('sm')]: {
       display: 'block',
-      width: '130px',
+      width: '160px',
     },
     [theme.breakpoints.up('md')]: {
-      width: '150px',
+      width: '180px',
     },
     [theme.breakpoints.up('lg')]: {
       width: '180px',

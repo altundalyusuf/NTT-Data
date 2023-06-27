@@ -17,9 +17,11 @@ import { Box } from '@mui/material';
 import { useDispatch} from 'react-redux';
 import { setGridInvisible } from '../redux/features/navbar/navbarSlice';
 
+
 const webSlides = [{image: web1,caption: 'Slide 1',},{image: web2,caption: 'Slide 2',},{image: web3,caption: 'Slide 3',},{image: web4,caption: 'Slide 4',},];
 const tabletSlides = [{image: tablet1,caption: 'Slide 1',},{image: tablet2,caption: 'Slide 2',},{image: tablet3,caption: 'Slide 3',},{image: tablet4,caption: 'Slide 4',},];
 const mobileSlides = [{image: mobil1,caption: 'Slide 1',},{image: mobil2,caption: 'Slide 2',},{image: mobil3,caption: 'Slide 3',},{image: mobil4,caption: 'Slide 4',},];
+
 
 const Slideshow = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -59,6 +61,8 @@ const Slideshow = () => {
               ))}
         </Carousel> 
       </Box>
+
+
       {/* Tablet */}
        <Box sx={{display:{xs:'none',sm:'block',md:'none'}}}>
         <Carousel
@@ -78,6 +82,8 @@ const Slideshow = () => {
               ))}
         </Carousel> 
       </Box>
+
+      
       {/* Mobil */}
       <Box sx={{display:{xs:'block',sm:'none'}}}>
         <Carousel
