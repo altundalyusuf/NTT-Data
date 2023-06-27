@@ -17,7 +17,7 @@ const Footer = () => {
                     {/* NTT Data Logo */}
                     <Box sx={{mb:{xs:'3rem' ,sm:'1rem'}}}>
                         <Box sx={{display: {xs: 'flex',}}}>
-                        <div style={{marginRight:'5px'}}>
+                        <div style={{marginRight:'6px'}}>
                             <LetterN/>
                             <LetterT/>
                             <LetterT1/>
