@@ -178,7 +178,7 @@ const Products = () => {
         {(isClicked?favs:visibleProducts).map((product,index) => (  
           <Grid item xs={12} sm={3} key={index}>
             <Card sx={{ maxWidth: 345, height:'100%' }}>
-              <a href="https://google.com" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <a href="https://www.hepsiburada.com/" style={{ textDecoration: 'none', color: 'inherit' }}>
               <CardActionArea>
                 <Box sx={{ position: 'relative' }}>
                   <CardMedia
@@ -252,7 +252,7 @@ const Products = () => {
       {(isClicked ? favs : products).map((product, index) => (
         <div key={index} style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
           <Card sx={{ maxWidth: 345, height:'100%' }}>
-              <a href="https://google.com" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <a href="https://www.hepsiburada.com/" style={{ textDecoration: 'none', color: 'inherit' }}>
               <CardActionArea>
                 <Box sx={{ position: 'relative' }}>
                   <CardMedia
